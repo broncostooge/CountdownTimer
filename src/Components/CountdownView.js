@@ -6,12 +6,21 @@ class CountdownView extends Component {
   constructor(props){
     super(props)
     this.state = {
-      name: this.props.location.state.name || "..."
+      name: this.props.location.state.name || "...",
+      imgURL: this.props.location.state.imgURL
     }
   }
+
   render() {
+
+    const style ={
+      backgroundImage: "url(" + this.state.imgURL + ")",
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "cover"
+    }
+
     return (
-      <div className="Container">
+      <div style={style} className="Container">
         <h1>Counting Down To {this.state.name}</h1>
         <Link to={'/'}>To HomePage</Link>
       </div>
