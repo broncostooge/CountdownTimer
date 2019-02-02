@@ -41,8 +41,14 @@ class UploadCountdownImage extends Component {
   
     var storageRef = firebase.storage().ref();
 
+    const style ={
+      backgroundImage: "url(" + "https://firebasestorage.googleapis.com/v0/b/moodcalendar-6676d.appspot.com/o/images%2FCapture1.PNG?alt=media&token=6010d1f9-cea8-4f42-a370-8415d56348bc" + ")",
+      backgroundRepeat: "no-repeat",
+  backgroundSize: "cover"
+    }
+
     return (
-      <div className="Container">
+      <div style ={style} className="Container">
         <h1>Upload An Image For Your Countdown to {this.state.name}</h1>
         <div id="filesubmit">
           <input type="file" className="file-select" accept="image/*"/>
