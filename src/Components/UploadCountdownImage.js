@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
-import '../Content/CSS/index.css'
 import firebase from '../Firebase/'
 
 const storageService = firebase.storage();
@@ -55,14 +53,6 @@ class UploadCountdownImage extends Component {
           <input type="file" className="file-select" accept="image/*"/>
           <button className="file-submit">Submit and View Countdown</button>
         </div>
-        <Link 
-        to={{ 
-          pathname: '/CountdownView', 
-          state: {
-            name: this.state.name, 
-            imgURL: "https://firebasestorage.googleapis.com/v0/b/moodcalendar-6676d.appspot.com/o/images%2F"+this.state.imgName+"?alt=media&token=6010d1f9-cea8-4f42-a370-8415d56348bc"
-          }
-        }}>To Countdown View</Link>
       </div>
     );
   }
