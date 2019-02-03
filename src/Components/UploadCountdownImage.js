@@ -11,7 +11,7 @@ class UploadCountdownImage extends Component {
   constructor(props){
     super(props)
     this.state = {
-      name: this.props.location.state.name || "...",
+      name: "...",
       imgName: "",
     };
 
@@ -21,6 +21,7 @@ class UploadCountdownImage extends Component {
   }
 
   componentDidMount(){
+    console.log(this.props);
     document.querySelector('.file-select').addEventListener('change', this.handleFileUploadChange);
     document.querySelector('.file-submit').addEventListener('click', this.handleFileUploadSubmit);
   }
@@ -54,7 +55,7 @@ class UploadCountdownImage extends Component {
     }
 
     return (
-      <div style ={style} id="ImageContainer" className="Container">
+      <div style ={style} id="ImageContainer">
         <h1>Upload An Image For Your Countdown to {this.state.name}</h1>
         <div id="filesubmit">
           <input type="file" className="file-select" accept="image/*"/>

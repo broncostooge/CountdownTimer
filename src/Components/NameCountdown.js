@@ -8,24 +8,26 @@ class NameCountdown extends Component {
     this.state = {
       name : "..."
     };
+
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(e){
     if(e.target.value.length > 0){
       this.setState({name: e.target.value});
+      this.props.onNameSelected(e.target.value);
     }
     else{
       this.setState({name: "..."})
+      this.props.onNameSelected("...");
     }
   }
 
   render() {
     return (
-      <div className="Container">
+      <div>
         <h1>What are you Counting Down To?</h1>
-        <h2> Counting down to {this.state.name}</h2>
-        <input onChange={this.handleChange.bind(this)} id="input_name_for_countodown" type="text" placeholder="Countdown Name"></input>
-        <Link to={{ pathname: '/UploadCountdownImage', state: {name: this.state.name}}}>To Upload Countdown Image</Link>
+        <input onChange={this.handleChange} id="input_name_for_countodown" type="text" placeholder="Countdown Name"></input>
       </div>
     );
   }
