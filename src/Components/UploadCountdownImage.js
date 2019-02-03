@@ -11,7 +11,6 @@ class UploadCountdownImage extends Component {
   constructor(props){
     super(props)
     this.state = {
-      name: "...",
       imgName: "",
     };
 
@@ -21,7 +20,6 @@ class UploadCountdownImage extends Component {
   }
 
   componentDidMount(){
-    console.log(this.props);
     document.querySelector('.file-select').addEventListener('change', this.handleFileUploadChange);
     document.querySelector('.file-submit').addEventListener('click', this.handleFileUploadSubmit);
   }
@@ -43,23 +41,19 @@ class UploadCountdownImage extends Component {
     }, () => {
        // Do something once upload is complete
        console.log('success');
-       document.getElementById("ImageContainer").style.backgroundImage = "url(" + "https://firebasestorage.googleapis.com/v0/b/moodcalendar-6676d.appspot.com/o/images%2F"+this.state.imgName+"?alt=media&token=6010d1f9-cea8-4f42-a370-8415d56348bc" + ")";
+       this.props.onImgNameSelected(this.state.imgName)
     });
   }
 
   render() {
 
-    const style ={
-      backgroundRepeat: "no-repeat",
-      backgroundSize: "cover"
-    }
 
     return (
-      <div style ={style} id="ImageContainer">
-        <h1>Upload An Image For Your Countdown to {this.state.name}</h1>
+      <div>
+        <h2>Upload An Image For Your Countdown</h2>
         <div id="filesubmit">
           <input type="file" className="file-select" accept="image/*"/>
-          <button className="file-submit">SUBMIT</button>
+          <button className="file-submit">Submit and View Countdown</button>
         </div>
         <Link 
         to={{ 

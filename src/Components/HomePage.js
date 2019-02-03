@@ -3,6 +3,8 @@ import '../Content/CSS/index.css'
 import NameCountdown from './NameCountdown';
 import TimeCountdown from './TimeCountdown';
 import UploadCountdownImage from './UploadCountdownImage';
+import CountdownView from './CountdownView'
+import LeftColumnOutputForCountdownView from './LeftColumnOutputForCountdownView'
 
 class HomePage extends Component {
   
@@ -11,7 +13,7 @@ class HomePage extends Component {
     this.state = {
       name: "...",
       countdown_stage: "Name",
-      endTime: null,
+      endTime: "...",
       intervalId: null,
       time: null,
       timeTo: {
@@ -20,107 +22,107 @@ class HomePage extends Component {
           minutes: "",
           seconds: ""
       },
-      imgName: "",
+      imgName: ""
     }
-  }
 
-  shouldComponentUpdate(nextProps, nextState){
-    return true;
+    this.setTimeTo = this.setTimeTo.bind(this);
   }
 
   componentDidMount() {
     if(this.state.intervalId){
-      var intervalId = setInterval(() => {this.setTimeTo(this.state.time)}, 1000);
+      var intervalId = setInterval(() => {this.setTimeTo(this.state.endTime)}, 1000);
       // store intervalId in the state so it can be accessed later:
       this.setState({intervalId: intervalId});
     }
  }
 
  componentWillUnmount() {
-  clearInterval(this.interval);
+  if(this.state.intervalId){
+    clearInterval(this.interval);
+  }
 }
+
+setTimeTo(time){
+    let endDate = new Date(time).getTime()
+    let now = new Date().getTime();
+    let delta = endDate - now;
+    this.setState({
+      time: time,
+      timeTo: {
+        days: Math.floor(delta / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((delta % (1000* 60 * 60 * 24)) / (1000 * 60 * 60)),
+        minutes: Math.floor((delta % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds: Math.floor((delta % (1000 * 60)) / 1000)
+      }
+    })
+ }
 
   handleName = (nameValue) => {
     this.setState({name: nameValue, countdown_stage: "Time"});
   }
 
   handleTime = (time) => {
-    if(time.length > 0){
-      let endDate_two = new Date(time).getTime()
-        let now = new Date().getTime();
-        let delta = endDate_two - now;
-        this.setState({
-          time: time,
-          timeTo: {
-          days: Math.floor(delta / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((delta % (1000* 60 * 60 * 24)) / (1000 * 60 * 60)),
-          minutes: Math.floor((delta % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((delta % (1000 * 60)) / 1000)
-          }
-        })
-      setInterval(() => {this.setTimeTo(time)}, 1000);
-    }
+    this.setState({endTime: time, countdown_stage: "UploadImage"});
   }
 
   handleImgName = (imgNameValue) => {
+    this.setState({imgName: imgNameValue, countdown_stage: "CountdownView"});
+
+    var intervalId = setInterval(() => {this.setTimeTo(this.state.endTime)}, 1000);
+      // store intervalId in the state so it can be accessed later:
+      this.setState({intervalId: intervalId});
+    
   }
 
- setTimeTo(time){
-    let endDate_two = new Date(time).getTime()
-    let now = new Date().getTime();
-    let delta = endDate_two - now;
-    this.setState({
-      countdown_stage: "UploadImage",
-      time: time,
-      timeTo: {
-      days: Math.floor(delta / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((delta % (1000* 60 * 60 * 24)) / (1000 * 60 * 60)),
-      minutes: Math.floor((delta % (1000 * 60 * 60)) / (1000 * 60)),
-      seconds: Math.floor((delta % (1000 * 60)) / 1000)
-      }
-    })
- }
+  handleReturnToHomePage = () => {
+    this.setState({name: "...", countdown_stage: "Name", endTime: "...", intervalId: null, time: null, timeTo:{days: "", hours: "", minutes: "", seconds: ""}, imgName: ""})
+  }
 
   render() {
 
-    let output;
     let leftColumnOutput;
-
-    if(this.state.countdown_stage === "Time" && this.state.intervalId){
-        const days = this.state.timeTo.days;
-        const hours = this.state.timeTo.hours;
-        const minutes = this.state.timeTo.minutes;
-        const seconds = this.state.timeTo.seconds;
-
-        output = "Days: " + days + " Hours: " + hours + " Minutes: " + minutes + " Seconds: " + seconds;
-    }
-    else{
-        output = "";
-    }
-
+    let countdownView;
+    let style;
+    let countdownOutput;
 
     if(this.state.countdown_stage === "Name"){
       leftColumnOutput = <NameCountdown onNameSelected={this.handleName}/>;
+      countdownView = "";
+      style = {};
      }else if(this.state.countdown_stage === "Time" ){
       leftColumnOutput = <TimeCountdown onTimeSelected={this.handleTime}/>;
+      countdownView = "";
+      style = {};
      }else if(this.state.countdown_stage === "UploadImage"){
-      leftColumnOutput = <UploadCountdownImage mounted={this.setTimeTo} />;
-    }
+      leftColumnOutput = <UploadCountdownImage onImgNameSelected={this.handleImgName} />;
+      countdownView = "";
+      style = {};
+     }else if(this.state.countdown_stage === "CountdownView"){
+      leftColumnOutput = <LeftColumnOutputForCountdownView onReturnToHomePage={this.handleReturnToHomePage} />;
+      countdownView = <CountdownView />;
+      style = {
+        backgroundImage: "url(" + "https://firebasestorage.googleapis.com/v0/b/moodcalendar-6676d.appspot.com/o/images%2F"+this.state.imgName+"?alt=media&token=6010d1f9-cea8-4f42-a370-8415d56348bc" + ")",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover"
+      }
+      countdownOutput = "Days: " + this.state.timeTo.days + " Hours: " + this.state.timeTo.hours + " Minutes: " + this.state.timeTo.minutes + " Seconds: " + this.state.timeTo.seconds;
+     }
 
     return (
-      <div>
-        <div>
+      <div className="Container">
+        <div className="LeftInnerContainer">
           {leftColumnOutput}
         </div>
         <div>
           <div>
-            <h2> Counting down to {this.state.name}</h2>
+            <h2>Counting down to {this.state.name}</h2>
           </div>
           <div>
-          <h2>Time Left: {output}</h2>
+            <h2>Counting Down To {this.state.endTime}</h2>
           </div>
           <div>
-
+            <div>{countdownOutput}</div>
+            <div style={style}></div>
           </div>
         </div>
       </div>
