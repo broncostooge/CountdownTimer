@@ -23,25 +23,28 @@ code {
   width:25%;
 }
 
-.LeftInnerContainer div{
+#input_name_for_countdown, 
+#input_time_for_countdown{
+  width: 50%;
+  float: left;
+}
+
+.Left-Container{
   display:flex;
-  flex-direction:column;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
 }
 
-.LeftInnerContainer div input{
-  width:50%
+.Left-Container .form-group{
+  width: 100%;
+  display:flex;
+  justify-content: center;
 }
 
-.LeftInnerContainer div h2{
-  text-align: center;
+.Left-Container .form-group button{
+  margin-left:5px;
 }
 
-.file-select{
-  width:100%!important;
-}
-
-#root > div > div > div:nth-child(2) > div:nth-child(3) > div:nth-child(2){
+#root > div > div > div:nth-child(2) > div:nth-child(3) > div:nth-child(1){
   min-height:75vh;
 }

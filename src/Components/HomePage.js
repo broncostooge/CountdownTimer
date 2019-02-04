@@ -12,7 +12,7 @@ class HomePage extends Component {
     super(props)
     this.state = {
       name: "...",
-      countdown_stage: "Name",
+      countdown_stage: "Time"||"Name",
       endTime: "...",
       intervalId: null,
       time: null,
@@ -62,6 +62,7 @@ setTimeTo(time){
   }
 
   handleTime = (time) => {
+    console.log(time);
     this.setState({endTime: time, countdown_stage: "UploadImage"});
   }
 
@@ -71,6 +72,7 @@ setTimeTo(time){
     var intervalId = setInterval(() => {this.setTimeTo(this.state.endTime)}, 1000);
       // store intervalId in the state so it can be accessed later:
       this.setState({intervalId: intervalId});
+      console.log(this);
     
   }
 
@@ -90,7 +92,7 @@ setTimeTo(time){
       countdownView = "";
       style = {};
      }else if(this.state.countdown_stage === "Time" ){
-      leftColumnOutput = <TimeCountdown onTimeSelected={this.handleTime}/>;
+      leftColumnOutput = <TimeCountdown name={this.state.name} onTimeSelected={this.handleTime}/>;
       countdownView = "";
       style = {};
      }else if(this.state.countdown_stage === "UploadImage"){
@@ -115,13 +117,13 @@ setTimeTo(time){
         </div>
         <div>
           <div>
-            <h2>Counting down to {this.state.name}</h2>
+            <h2>Counting Down To {this.state.name}</h2>
           </div>
           <div>
-            <h2>Counting Down To {this.state.endTime}</h2>
+            <h2>{this.state.name} Starts on {this.state.endTime}</h2>
           </div>
           <div>
-            <div>{countdownOutput}</div>
+          {countdownOutput}
             <div style={style}></div>
           </div>
         </div>

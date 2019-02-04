@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import HomePage from './HomePage'
+import '../Content/CSS/bootstrap.min.css'
 
 class App extends Component {
   render() {

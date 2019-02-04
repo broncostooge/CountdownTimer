@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
-import '../Content/CSS/index.css'
+import DatePicker from 'react-date-picker';
 
 class TimeCountdown extends Component {
   constructor(props){
     super(props)
+    this.state = {
+      value: new Date()
+    }
     
     this.handleChange = this.handleChange.bind(this);
 
   }
 
-  handleChange(){
-      let time = document.getElementById("input_time_for_countodown").value;
+  onChange = value => this.setState({ value })
 
+  handleChange(){
+      let time = this.state.value.toDateString();
+      console.log(time);
     if(time.length > 0){
+      console.log(time);
         this.props.onTimeSelected(time)
     }
     else{
@@ -20,12 +26,16 @@ class TimeCountdown extends Component {
   }
 
   render() {
-
+    const { value } = this.state;
     return (
       <div>
-        <h2>When are we Countding down To?</h2>
-        <input id="input_time_for_countodown" type="text" placeholder="Countdown Time"></input>
-        <button onClick={this.handleChange} type="submit">Submit</button>
+        <div className="Left-Container">
+        <h2>When Does {this.props.name} Start?</h2>
+          <div className="form-group">
+            <DatePicker onChange={this.onChange} value={value} />
+            <button className="btn btn-primary" onClick={this.handleChange} type="submit">Submit</button>
+          </div>
+        </div>
       </div>
     );
   }
