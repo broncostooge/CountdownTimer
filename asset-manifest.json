@@ -1,15 +1,15 @@
 {
-  "main.css": "/countdown/static/css/main.5d5dae7c.chunk.css",
-  "main.js": "/countdown/static/js/main.47249288.chunk.js",
-  "main.js.map": "/countdown/static/js/main.47249288.chunk.js.map",
-  "static/css/1.534d00fa.chunk.css": "/countdown/static/css/1.534d00fa.chunk.css",
-  "static/js/1.0ac6f865.chunk.js": "/countdown/static/js/1.0ac6f865.chunk.js",
-  "static/js/1.0ac6f865.chunk.js.map": "/countdown/static/js/1.0ac6f865.chunk.js.map",
-  "runtime~main.js": "/countdown/static/js/runtime~main.08800195.js",
-  "runtime~main.js.map": "/countdown/static/js/runtime~main.08800195.js.map",
-  "static/css/main.5d5dae7c.chunk.css.map": "/countdown/static/css/main.5d5dae7c.chunk.css.map",
-  "static/css/1.534d00fa.chunk.css.map": "/countdown/static/css/1.534d00fa.chunk.css.map",
-  "index.html": "/countdown/index.html",
-  "precache-manifest.6fc37e247aa4d1b19f037eb8830bcb53.js": "/countdown/precache-manifest.6fc37e247aa4d1b19f037eb8830bcb53.js",
-  "service-worker.js": "/countdown/service-worker.js"
+  "main.css": "/CountdownTimer/static/css/main.5d5dae7c.chunk.css",
+  "main.js": "/CountdownTimer/static/js/main.a47fd02a.chunk.js",
+  "main.js.map": "/CountdownTimer/static/js/main.a47fd02a.chunk.js.map",
+  "static/css/1.534d00fa.chunk.css": "/CountdownTimer/static/css/1.534d00fa.chunk.css",
+  "static/js/1.463883f9.chunk.js": "/CountdownTimer/static/js/1.463883f9.chunk.js",
+  "static/js/1.463883f9.chunk.js.map": "/CountdownTimer/static/js/1.463883f9.chunk.js.map",
+  "runtime~main.js": "/CountdownTimer/static/js/runtime~main.9bbb45b6.js",
+  "runtime~main.js.map": "/CountdownTimer/static/js/runtime~main.9bbb45b6.js.map",
+  "static/css/main.5d5dae7c.chunk.css.map": "/CountdownTimer/static/css/main.5d5dae7c.chunk.css.map",
+  "static/css/1.534d00fa.chunk.css.map": "/CountdownTimer/static/css/1.534d00fa.chunk.css.map",
+  "index.html": "/CountdownTimer/index.html",
+  "precache-manifest.6aad8a3a4d5bc07325768404689a2f06.js": "/CountdownTimer/precache-manifest.6aad8a3a4d5bc07325768404689a2f06.js",
+  "service-worker.js": "/CountdownTimer/service-worker.js"
 }
