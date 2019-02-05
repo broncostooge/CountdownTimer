@@ -13,8 +13,9 @@ class LeftColumnOutputForCountdownView extends Component {
 
     render(){
         return(
-            <div>
-                <button onClick={this.returnToHomePage}>Return to Beginning</button>
+            <div className="Left-Container">
+                <h2>Enjoy Your Countdown.</h2>
+                <button className="btn btn-primary" type="submit" onClick={this.returnToHomePage}>Create Another Countdown</button>
             </div>
         )
     }

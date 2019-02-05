@@ -10,6 +10,8 @@ class UploadCountdownImage extends Component {
     super(props)
     this.state = {
       imgName: "",
+      imgLocation: null,
+      ImageURI: null
     };
 
     this.handleFileUploadChange = this.handleFileUploadChange.bind(this);
@@ -23,8 +25,16 @@ class UploadCountdownImage extends Component {
   }
 
   handleFileUploadChange(e) {
+
+    let ImagePreview = document.getElementById("ImagePreview")
     selectedFile = e.target.files[0];
-    this.setState({name: this.state.name, imgName: selectedFile.name})
+
+    ImagePreview.className += "show";
+
+    document.getElementById("imageName").value = selectedFile.name;
+
+    this.setState({name: this.state.name, imgName: selectedFile.name, ImageURI: URL.createObjectURL(selectedFile)})
+    
   }
 
   handleFileUploadSubmit(e) {
@@ -47,11 +57,20 @@ class UploadCountdownImage extends Component {
 
 
     return (
-      <div>
+      <div className="Left-Container">
         <h2>Upload An Image For Your Countdown</h2>
-        <div id="filesubmit">
-          <input type="file" className="file-select" accept="image/*"/>
-          <button className="file-submit">Submit and View Countdown</button>
+        <div className="input-group" id="img_upload_input">
+          <label className="input-group-btn">
+              <span className="btn btn-primary">
+                  Browse&hellip; <input type="file" className="file-select" accept="image/*"/>
+              </span>
+          </label>
+          <input type="text" className="form-control" id="imageName" readOnly/>
+        </div>
+        <div id="ImagePreview">
+          <h3>Image Preview</h3>
+          <img alt="preview_image" src={this.state.ImageURI}></img>
+          <button className="btn btn-primary file-submit">Submit and View Countdown</button>
         </div>
       </div>
     );

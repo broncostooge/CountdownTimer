@@ -3,7 +3,6 @@ import '../Content/CSS/index.css'
 import NameCountdown from './NameCountdown';
 import TimeCountdown from './TimeCountdown';
 import UploadCountdownImage from './UploadCountdownImage';
-import CountdownView from './CountdownView'
 import LeftColumnOutputForCountdownView from './LeftColumnOutputForCountdownView'
 
 class HomePage extends Component {
@@ -12,7 +11,7 @@ class HomePage extends Component {
     super(props)
     this.state = {
       name: "...",
-      countdown_stage: "Time"||"Name",
+      countdown_stage: "Name",
       endTime: "...",
       intervalId: null,
       time: null,
@@ -62,7 +61,6 @@ setTimeTo(time){
   }
 
   handleTime = (time) => {
-    console.log(time);
     this.setState({endTime: time, countdown_stage: "UploadImage"});
   }
 
@@ -72,7 +70,6 @@ setTimeTo(time){
     var intervalId = setInterval(() => {this.setTimeTo(this.state.endTime)}, 1000);
       // store intervalId in the state so it can be accessed later:
       this.setState({intervalId: intervalId});
-      console.log(this);
     
   }
 
@@ -83,25 +80,20 @@ setTimeTo(time){
   render() {
 
     let leftColumnOutput;
-    let countdownView;
     let style;
     let countdownOutput;
 
     if(this.state.countdown_stage === "Name"){
       leftColumnOutput = <NameCountdown onNameSelected={this.handleName}/>;
-      countdownView = "";
       style = {};
      }else if(this.state.countdown_stage === "Time" ){
       leftColumnOutput = <TimeCountdown name={this.state.name} onTimeSelected={this.handleTime}/>;
-      countdownView = "";
       style = {};
      }else if(this.state.countdown_stage === "UploadImage"){
       leftColumnOutput = <UploadCountdownImage onImgNameSelected={this.handleImgName} />;
-      countdownView = "";
       style = {};
      }else if(this.state.countdown_stage === "CountdownView"){
       leftColumnOutput = <LeftColumnOutputForCountdownView onReturnToHomePage={this.handleReturnToHomePage} />;
-      countdownView = <CountdownView />;
       style = {
         backgroundImage: "url(" + "https://firebasestorage.googleapis.com/v0/b/moodcalendar-6676d.appspot.com/o/images%2F"+this.state.imgName+"?alt=media&token=6010d1f9-cea8-4f42-a370-8415d56348bc" + ")",
         backgroundRepeat: "no-repeat",
@@ -115,7 +107,7 @@ setTimeTo(time){
         <div className="LeftInnerContainer">
           {leftColumnOutput}
         </div>
-        <div>
+        <div className="RightInnerContainer">
           <div>
             <h2>Counting Down To {this.state.name}</h2>
           </div>
@@ -128,13 +120,6 @@ setTimeTo(time){
           </div>
         </div>
       </div>
-      /*
-      <div className="Container">
-            <h1>Countdown Timer</h1>
-            <p>
-                <Link to={'/NameCountdown'}>To Name Countdown</Link>
-            </p>
-      </div>*/
     );
   }
 }

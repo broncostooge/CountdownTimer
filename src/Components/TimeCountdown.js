@@ -16,9 +16,7 @@ class TimeCountdown extends Component {
 
   handleChange(){
       let time = this.state.value.toDateString();
-      console.log(time);
     if(time.length > 0){
-      console.log(time);
         this.props.onTimeSelected(time)
     }
     else{
@@ -28,13 +26,11 @@ class TimeCountdown extends Component {
   render() {
     const { value } = this.state;
     return (
-      <div>
-        <div className="Left-Container">
+      <div className="Left-Container">
         <h2>When Does {this.props.name} Start?</h2>
-          <div className="form-group">
-            <DatePicker onChange={this.onChange} value={value} />
-            <button className="btn btn-primary" onClick={this.handleChange} type="submit">Submit</button>
-          </div>
+        <div className="form-group">
+          <DatePicker onChange={this.onChange} value={value} />
+          <button className="btn btn-primary" onClick={this.handleChange} type="submit">Submit</button>
         </div>
       </div>
     );
