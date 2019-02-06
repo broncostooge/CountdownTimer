@@ -92,3 +92,8 @@ h2{
 #img_upload_input{
   width:75%;
 }
+
+#root > div > div > div.RightInnerContainer > div:nth-child(3){
+  display: flex;
+  justify-content: center;
+}

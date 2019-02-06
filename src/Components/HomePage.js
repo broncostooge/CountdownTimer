@@ -95,9 +95,9 @@ setTimeTo(time){
      }else if(this.state.countdown_stage === "CountdownView"){
       leftColumnOutput = <LeftColumnOutputForCountdownView onReturnToHomePage={this.handleReturnToHomePage} />;
       style = {
-        backgroundImage: "url(" + "https://firebasestorage.googleapis.com/v0/b/moodcalendar-6676d.appspot.com/o/images%2F"+this.state.imgName+"?alt=media&token=6010d1f9-cea8-4f42-a370-8415d56348bc" + ")",
+        backgroundImage: "https://firebasestorage.googleapis.com/v0/b/moodcalendar-6676d.appspot.com/o/images%2F"+this.state.imgName+"?alt=media&token=6010d1f9-cea8-4f42-a370-8415d56348bc",
         backgroundRepeat: "no-repeat",
-        backgroundSize: "cover"
+        backgroundPosition: "center"
       }
       countdownOutput = "Days: " + this.state.timeTo.days + " Hours: " + this.state.timeTo.hours + " Minutes: " + this.state.timeTo.minutes + " Seconds: " + this.state.timeTo.seconds;
      }
@@ -115,8 +115,10 @@ setTimeTo(time){
             <h2>{this.state.name} Starts on {this.state.endTime}</h2>
           </div>
           <div>
-          {countdownOutput}
-            <div style={style}></div>
+            <span>{countdownOutput}</span>
+          </div>
+          <div>
+            <img src={style.backgroundImage}/>
           </div>
         </div>
       </div>

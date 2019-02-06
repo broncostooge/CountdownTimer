@@ -19,7 +19,6 @@ class LeftColumnOutputForCountdownView extends Component {
             </div>
         )
     }
-
 }
 
 export default LeftColumnOutputForCountdownView;
